@@ -12,19 +12,19 @@ This is a TODO-like app which provide more function to benefit users. This app i
 
 ## Features
 ### Stage 1
-- [] TODO
-  - [] Periodic TODO
-- [] Reminder
-  - [] Snooze/cancel
-- [] Calendar support
-- [] Desktop widget
+- [ ] TODO
+  - [ ] Periodic TODO
+- [ ] Reminder
+  - [ ] Snooze/cancel
+- [ ] Calendar support
+- [ ] Desktop widget
 
 ### Stage 2
-- [] Summary chart
-- [] Google Drive integration
-- [] Installed app association
-- [] Multiple TODO profile
-- [] Sustainable/Long running TODO by stage
+- [ ] Summary chart
+- [ ] Google Drive integration
+- [ ] Installed app association
+- [ ] Multiple TODO profile
+- [ ] Sustainable/Long running TODO by stage
 
 ## Build
 You need to use toolset supporting `com.android.application:7.3.0-beta03`.
