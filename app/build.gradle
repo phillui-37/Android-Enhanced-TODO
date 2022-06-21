@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.four_o_one_plus_three.enhanced_todo"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "0.1"
@@ -18,6 +18,16 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+
     }
 
     buildTypes {
@@ -42,6 +52,7 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += "DebugProbesKt.bin"
         }
     }
 }
@@ -63,4 +74,28 @@ dependencies {
 
     // navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    // other ktx
+    implementation "androidx.collection:collection-ktx:1.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version" // for room data access
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Arrow for fp support
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-fx-coroutines:$arrow_version"
+    implementation "io.arrow-kt:arrow-fx-stm:$arrow_version"
+    implementation "io.arrow-kt:arrow-optics:$arrow_version"
 }
