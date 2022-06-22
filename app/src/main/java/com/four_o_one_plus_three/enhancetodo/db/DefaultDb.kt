@@ -24,5 +24,6 @@ abstract class DefaultDb: RoomDatabase() {
             }
         }
     }
+
     abstract fun todoDao(): TodoDao
 }

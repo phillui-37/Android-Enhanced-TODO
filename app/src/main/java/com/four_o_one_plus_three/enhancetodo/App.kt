@@ -9,6 +9,6 @@ import com.four_o_one_plus_three.enhancetodo.db.DefaultDb
 class App: Application() {
     override fun onCreate() {
         super.onCreate()
-        DefaultDb(this) // to init db
+//        DefaultDb(this) // to init db
     }
 }

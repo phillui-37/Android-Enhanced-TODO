@@ -46,7 +46,7 @@ interface TodoDao {
     suspend fun update(todo: TodoEntity)
 
     @Query("SELECT * FROM todo")
-    suspend fun queryAllTodo(): Flow<List<TodoEntity>>
+    fun queryAllTodo(): Flow<List<TodoEntity>>
 
     @Query("SELECT * FROM todo WHERE id=:id")
     suspend fun queryTodoById(id: Long): TodoEntity?
