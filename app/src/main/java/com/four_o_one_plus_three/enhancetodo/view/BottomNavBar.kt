@@ -7,6 +7,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
 import androidx.navigation.NavController
@@ -18,7 +19,7 @@ import com.four_o_one_plus_three.enhancetodo.navigation.BottomRoute
 @Composable
 fun BottomNavBar(navController: NavController) {
     val items = listOf(BottomRoute.Home, BottomRoute.Test)
-    NavigationBar {
+    NavigationBar(containerColor = Color(0,0,0)) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         items.forEach { screen ->

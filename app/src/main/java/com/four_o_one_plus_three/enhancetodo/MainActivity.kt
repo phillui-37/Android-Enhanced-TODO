@@ -19,9 +19,10 @@ import androidx.navigation.compose.rememberNavController
 import com.four_o_one_plus_three.enhancetodo.navigation.BottomRoute
 import com.four_o_one_plus_three.enhancetodo.navigation.NavigationTree
 import com.four_o_one_plus_three.enhancetodo.ui.theme.EnhanceTODOTheme
+import com.four_o_one_plus_three.enhancetodo.view.BottomNavBar
 
 class MainActivity : ComponentActivity() {
-//    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,9 +34,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-//                    Scaffold(bottomBar = { BottomNavBar(navController = navController)}, content = {
-                        NavigationTree(navController = navController, /*padding = it*/)
-//                    })
+                    Scaffold(bottomBar = { BottomNavBar(navController = navController)}, content = {
+                        NavigationTree(navController = navController, padding = it)
+                    })
                 }
             }
         }
