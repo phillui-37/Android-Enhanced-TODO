@@ -1,6 +1,5 @@
 package com.four_o_one_plus_three.enhancetodo.db
 
-import androidx.annotation.NonNull
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import java.time.Instant
@@ -13,10 +12,14 @@ enum class TodoRepeatType(val flag: Int) {
     YEARLY(4)
 }
 
+enum class TodoBackgroundColor(val colorCode: String) {
+    Default("#FFBD33")
+}
+
 @Entity(tableName = "todo")
 data class TodoEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Long=0,
     @ColumnInfo(name = "content")
     val content: String = "",
     @ColumnInfo(name = "create_time")
@@ -35,12 +38,14 @@ data class TodoEntity(
     val isDeleted: Boolean = false,
     @ColumnInfo(name = "is_archived")
     val isArchived: Boolean = false,
+    @ColumnInfo(name = "background_color")
+    val backgroundColor: String = TodoBackgroundColor.Default.colorCode
 )
 
 @Dao
 interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(vararg todoes: TodoEntity)
+    suspend fun insert(vararg todos: TodoEntity)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(todo: TodoEntity)
@@ -50,4 +55,10 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo WHERE id=:id")
     suspend fun queryTodoById(id: Long): TodoEntity?
+}
+
+suspend fun TodoDao.updateWithoutTime(todo: TodoEntity) {
+    update(todo.copy(
+        lastModified = Instant.now().epochSecond
+    ))
 }

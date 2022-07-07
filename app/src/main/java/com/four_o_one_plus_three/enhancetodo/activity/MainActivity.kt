@@ -1,4 +1,4 @@
-package com.four_o_one_plus_three.enhancetodo
+package com.four_o_one_plus_three.enhancetodo.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,12 +16,25 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import arrow.core.none
+import arrow.core.toOption
 import com.four_o_one_plus_three.enhancetodo.navigation.BottomRoute
-import com.four_o_one_plus_three.enhancetodo.navigation.NavigationTree
+import com.four_o_one_plus_three.enhancetodo.navigation.Host
+import com.four_o_one_plus_three.enhancetodo.navigation.Pages
 import com.four_o_one_plus_three.enhancetodo.ui.theme.EnhanceTODOTheme
 import com.four_o_one_plus_three.enhancetodo.view.BottomNavBar
+import com.four_o_one_plus_three.enhancetodo.view.Test
+import com.four_o_one_plus_three.enhancetodo.view.Todo
+import com.four_o_one_plus_three.enhancetodo.viewmodel.TodoVM
 
 class MainActivity : ComponentActivity() {
+    private val navList by lazy {
+        listOf(
+            Host.NavContent(Pages.Todo.path, TodoVM().toOption(), Todo),
+            Host.NavContent(Pages.Test.path, none(), Test)
+        )
+    }
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     Scaffold(bottomBar = { BottomNavBar(navController = navController)}, content = {
-                        NavigationTree(navController = navController, padding = it)
+                        Host(navList).NavigationTree(navController = navController, padding = it)
                     })
                 }
             }
